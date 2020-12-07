@@ -5,7 +5,7 @@
 # Written on Xubuntu 20.04
 
 # This is a list of files and directories to back up
-FILES="$HOME/Soft $HOME/.newsboat $HOME/.config $HOME/.bashrc $HOME/Pictures"
+FILES="$HOME/Soft $HOME/.newsboat $HOME/.config $HOME/.bashrc $HOME/.vimrc $HOME/Pictures"
 
 # I only need one subfolder, Dropbox.
 # Since I don't create it automatically, I have a separate list with Dropbox folders I need to back up.
