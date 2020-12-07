@@ -24,11 +24,12 @@ else
 fi
 
 [ ! -e $DEST ] && echo "LOG: Creating today's backup folder $DEST..." && mkdir $DEST
+[ ! -e $DEST/Logs ] && echo "LOG: Creating today's log folder $DEST/Logs..." && mkdir $DEST/Logs
 
 # VMs can easily take hundreds of gigs. Not backing up those!
 echo "LOG: Tarring data and saving into $DEST/$TMPNAME.7z"
 echo "Please don't disconnect the SSD. Might take a while."
 cd
-tar --exclude="VMs" --exclude="Dropbox" -cvzpf  $DEST/$TMPNAME.tar.gz $HOME >> $DEST/$TMPNAME.log
+tar --exclude="VMs" --exclude="Dropbox" -cvzpf  $DEST/$TMPNAME.tar.gz $HOME >> $DEST/Logs/$TMPNAME.log
 
 echo "LOG: Done! More backups for the backups god!"

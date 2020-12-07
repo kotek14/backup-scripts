@@ -33,6 +33,7 @@ else
 fi
 
 [ ! -e $DEST ] && echo "LOG: Creating today's backup folder $DEST..." && mkdir $DEST
+[ ! -e $DEST/Logs ] && echo "LOG: Creating today's log folder $DEST/Logs..." && mkdir $DEST/Logs
 
 echo "LOG: Creating directory $TEMPDIR..."
 [ -e $TEMPDIR ] && rm -rf $TEMPDIR
@@ -45,15 +46,15 @@ mkdir $TEMPDIR
 # Copying the necessary files and folders to the temp folder and saving the rsync output to log file.
 # In case I back up the ~/Soft folder, I have an --exclude in place to avoid backing up the Arduino IDE.
 echo "LOG: Copying folders of interest into $TEMPDIR"
-rsync -av --exclude="*arduino*" $FILES $TEMPDIR >> $DEST/$TMPNAME.log
-[ ! -z "$DROPBOX" ] && rsync -av $DROPBOX $TEMPDIR/Dropbox >> $DEST/$TMPNAME.log
+rsync -av --exclude="*arduino*" $FILES $TEMPDIR >> $DEST/Logs/$TMPNAME.log
+[ ! -z "$DROPBOX" ] && rsync -av $DROPBOX $TEMPDIR/Dropbox >> $DEST/Logs/$TMPNAME.log
 
 # Gzipping the temp folder and saving it to SSD or Desktop, saving tar output to log file.
 # I enter the directory so I don't end up tarring the /tmp folder.
 # Maybe it has something to do with the flags I blindly copied from stackoverflow.
 echo "LOG: Tarring everything up and saving to $DEST/$TMPNAME"
 cd /tmp
-tar -cvzpf $DEST/$TMPNAME.tar.gz $TMPNAME >> $DEST/$TMPNAME.log
+tar -cvzpf $DEST/$TMPNAME.tar.gz $TMPNAME >> $DEST/Logs/$TMPNAME.log
 cd
 
 echo "LOG: Cleaning up..."
